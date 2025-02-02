@@ -1,0 +1,23 @@
+gmgn:
+  api_key: "your_api_key_here"
+  endpoint: "https://api.gmgn.ai/v1"
+
+dex_screener:
+  refresh_interval: 30  # Seconds between updates
+
+rugcheck:
+  endpoint: "https://api.rugcheck.xyz/v1"
+  min_score: 85  # Minimum audit score to accept
+
+trading:
+  position_size_pct: 0.1  # 10% of balance per trade
+  leverage: 2
+  slippage_tolerance: 1.5  # 1.5%
+
+risk:
+  stop_loss_pct: 10  # 10% loss tolerance
+  take_profit_pct: 25  # 25% profit target
+
+blacklists:
+  tokens: []
+  developers: []
