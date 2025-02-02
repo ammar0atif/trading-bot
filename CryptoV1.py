@@ -20,37 +20,15 @@ class CryptoTrader:
         with open(CONFIG_FILE, "r") as f:
             return yaml.safe_load(f)
 
+    # add test versions of the analyze_and_trade method in order to test that they work (instead of api called or actual buys, just print a message aka log it to the console)
+    # print the time, message, and buy/sell status that way you can tell if you bot would make money if it was a real trade before you use real money
+
     def analyze_and_trade(self, pair_address: str):
         """Complete trading workflow"""
         try:
             # 1. Fetch pair data
             pair_data = self._get_dexscreener_data(pair_address)
             if not pair_data:
-
-
-gmgn:
-  api_key: "your_api_key_here"
-  endpoint: "https://api.gmgn.ai/v1"
-
-dex_screener:
-  refresh_interval: 30  # Seconds between updates
-
-rugcheck:
-  endpoint: "https://api.rugcheck.xyz/v1"
-  min_score: 85  # Minimum audit score to accept
-
-trading:
-  position_size_pct: 0.1  # 10% of balance per trade
-  leverage: 2
-  slippage_tolerance: 1.5  # 1.5%
-
-risk:
-  stop_loss_pct: 10  # 10% loss tolerance
-  take_profit_pct: 25  # 25% profit target
-
-blacklists:
-  tokens: []
-  developers: []
                 return {"status": "error", "message": "Data fetch failed"}
 
             # 2. Security analysis
@@ -150,6 +128,7 @@ blacklists:
             return {"passed": False, "reason": "Audit verification error"}
 
     # Additional security checks
+    # Finish these security check and confirm that they work
     def _check_liquidity(self, data: dict) -> dict: ...
     def _validate_volume(self, data: dict) -> dict: ...
     def _analyze_holders(self, data: dict) -> dict: ...
@@ -159,7 +138,7 @@ blacklists:
         """Fetch pair data from DexScreener"""
         try:
             response = self.session.get(
-                f"https://api.dexscreener.com/latest/dex/pairs/{pair_address}",
+                f"https://api.dexscreener.com/latest/dex/pairs/{pair_address}", # update the URL to the correct one (V1) https://docs.dexscreener.com/api/reference
                 timeout=10
             )
             return response.json()
